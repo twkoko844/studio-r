@@ -1,0 +1,10 @@
+<div class="lbody">
+<% @page_title = "会員登録" %>
+<h2><%= @page_title %></h2>
+<div class="box">
+<%= form_for @member do |form| %>
+<%= render "form", form: form %>
+<%= form.submit %>
+<% end %>
+</div>
+</div>

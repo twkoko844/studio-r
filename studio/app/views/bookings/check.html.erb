@@ -1,0 +1,15 @@
+<div class="lbody">
+<% @page_title = "予約確認" %>
+<h2><%= @page_title %></h2>
+<div class="box">
+<%= form_tag :booksearch_bookings, method: :get do %>
+<table class="form">
+<tr align="left">
+  <th>予約id</th>
+  <td><%= text_field_tag :book_id, params[:q] %></td>
+</tr>
+</table>
+<%= submit_tag "検索" %>
+<% end %>
+</div>
+</div>

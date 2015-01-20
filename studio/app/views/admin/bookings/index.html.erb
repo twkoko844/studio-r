@@ -1,0 +1,32 @@
+<div class="lbody">
+<% @page_title = "予約一覧" %>
+<h2><%= @page_title %></h2>
+<div class="box">
+<% if @bookings.present? %>
+<table class="list">
+  <tr>
+    <th>予約id</th>
+    <th>予約者</th>
+    <th>予約日</th>
+    <th>予約時間</th>
+    <th>部屋</th>
+    <th>削除</th>
+  </tr>
+  <% @bookings.each do |booking| %>
+  <tr>
+    <td><%= link_to booking.book_id, [:admin, booking] %></td>
+    <td><% if booking.member %><%= booking.member.name %><% else %>未登録ユーザー<% end %></td>
+    <td><%= booking.date %></td>
+    <td><%= booking.from %>時 ~ <%= booking.to %>時</td>
+　　　　<td><%= booking.room.name %></td>
+    <td><%= link_to "削除", [:admin, booking], method: :delete,
+            confirm: "本当に削除しますか?" %></td>
+  </tr>
+  <% end %>
+</table>
+
+<% else %>
+<p>予約はありません。</p>
+<% end %>
+</div>
+</div>
