@@ -1,0 +1,31 @@
+<div class="lbody">
+<% @page_title = "機材編集" %>
+<h2><%= @page_title %></h2>
+<div class="box">
+<%= form_for [:admin, @material] do |f| %>
+<table>
+  <tr>
+    <th>id</th>
+    <td><%= @material.id %></td>
+  </tr>
+  <tr>
+    <th>機材名</th>
+    <td><%= f.text_field :name %></td>
+  </tr>
+  <tr>
+    <th>種類</th>
+    <!-- <td><%= @material.kind.name %></td> -->
+    <td><%= select :kind, "", @materialKind.map{|mk|[mk.name, mk.id]} %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :suspend %></th>
+    <td>
+      <%= f.check_box :suspend %>
+      <%= f.label :suspend %>
+    </td>
+  </tr>
+</table>
+<p><%= f.submit "保存" %></p>
+<% end %>
+</div>
+</div>

@@ -1,0 +1,16 @@
+<div id="header">
+<ul>
+  <li class="header-left"><%= link_to :root do %><span class="link"><%= "TOP" %></span><% end %></li>
+  <li class="header-left"><%= link_to :search_bookings do %><span class="link"><%= "新規予約" %></span><% end %></li>
+  <li class="header-left"><%= link_to :check_bookings do %><span class="link"><%= "予約確認" %></span><% end %></li>
+  <% if @current_member %>
+  <li class="header-right"><%= link_to :session, method: :delete, confirm: "logout??" do %><span class="link"><%= "logout" %></span><% end %></li>
+  <% if@current_member.admin %>
+    <li class="header-right"><%= link_to :admin_root do %><span class="link"><%= "管理" %></span><% end %></li>
+  <% end %>
+  <li class="header-right"><%= link_to :account do %><span class="link"><%= @current_member.name %></span><% end %></li>
+  <% else %>
+  <li class="header-right"><%= link_to :login do %><span class="link"><%= "login" %></span><% end %></li>
+  <% end %>
+</ul>
+</div>

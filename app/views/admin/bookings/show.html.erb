@@ -1,0 +1,12 @@
+<div class="lbody">
+<% @page_title = "予約詳細" %>
+<h2><%= @page_title %></h2>
+<div class="box">
+<%= link_to "編集（仮）", [:edit, :admin, @booking] %><%= link_to "一覧に戻る", [:admin, :bookings] %>
+<%= render "body" %>
+
+</br></br>
+<p><%= link_to "予約キャンセル", @booking, method: :delete, confirm: "本当にキャンセルしますか？" %></p>
+
+</div>
+</div>

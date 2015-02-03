@@ -1,0 +1,14 @@
+<div class="lbody">
+<% @page_title = "予約詳細" %>
+<h2><%= @page_title %></h2>
+<div class="box">
+<% if !@current_member.present? %>
+<p style="color:red">未登録ユーザーは予約idを控えてください。</p>
+<% end %>
+<%= render "admin/bookings/body" %>
+</br></br>
+
+<p><%= link_to "予約キャンセル", @booking, method: :delete, confirm: "本当にキャンセルしますか？" %></p>
+
+</div>
+</div>

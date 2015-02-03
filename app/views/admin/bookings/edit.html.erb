@@ -1,0 +1,45 @@
+<div class="lbody">
+<% @page_title = "予約編集" %>
+<h2><%= @page_title %></h2>
+<div class="box">
+<% if @booking.errors.any? %>
+    <div id="error_explanation">
+      <h3><%= @booking.errors.count %>件のエラーが発生しました。</h3>
+
+      <ul>
+      <% @booking.errors.full_messages.each do |message| %>
+        <li>過去の予約はできません</li>
+      <% end %>
+      </ul>
+    </div>
+<% end %>
+<%= form_for [:admin, @booking] do |f| %>
+<table class="form">
+<tr>
+  <th><%= f.label :book_id %></th>
+  <td><%= f.text_field :book_id %></td>
+</tr>
+<tr>
+  <th><%= f.label :member %></th>
+  <td><%= f.select :member, Member.all.map{|t|[t.name, t.id]} %></td>
+</tr>
+<tr>
+  <th><%= f.label :date %></th>
+  <td><%= f.date_select :date %></td>
+</tr>
+<tr>
+  <th><%= f.label :from %>~<%= f.label :to %></th>
+  <td><%= f.select :from, (1..11).map{|t|[t, t]} %>時~<%= f.select :to, (1..11).map{|t|[t, t]} %>時</td>
+</tr>
+<tr>
+  <th><%= f.label :room %></th>
+  <td><%= f.select :room, Room.all.map{|t|[t.name, t.id]} %></td>
+</tr>
+</table>
+<%= f.submit %>
+<% end %>
+<p>バリデーションしていないので編集するとダブルブッキングになるの可能性あり。
+memberは未登録ユーザー選択不可。
+そもそも編集いらないと決めた</p>
+</div>
+</div>

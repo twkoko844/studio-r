@@ -1,0 +1,44 @@
+<div class="lbody">
+<% @page_title = "予約一覧" %>
+<h2><%= @page_title %></h2>
+<div class="box">
+<% if @bookings.present? %>
+<%= form_tag :search_admin_bookings, method: :get do %>
+<p>メンバー名で検索<%= text_field_tag "member_name", params[:mamber_name] %>
+<%= submit_tag "検索" %></p>
+<% end %>
+<table class="list">
+  <tr>
+    <th>予約id</th>
+    <th>予約者</th>
+    <th>予約日</th>
+    <th>予約時間</th>
+    <th>部屋</th>
+    <th>機材数</th>
+    <th>完了</th>
+    <th>編集</th>
+  </tr>
+  <% @bookings.each do |booking| %>
+  <tr>
+    <td><%= link_to booking.book_id, [:admin, booking] %></td>
+    <td><% if booking.member %><%= booking.member.name %><% else %>未登録ユーザー<% end %></td>
+    <td><%= booking.date %></td>
+    <td><%= booking.from %>時 ~ <%= booking.to %>時</td>
+　　　　<td><%= booking.room.name %></td>
+    <td><%= booking.materials.count %></td>
+    <% if booking.date >= Date.today%>
+    <td>未</td>
+<% else %>
+    <td>済</td>
+<% end %>
+    <td><%= link_to "編集（仮）", [:edit, :admin, booking] %>|<%= link_to "削除", [:admin, booking], method: :delete,
+            confirm: "本当に削除しますか?" %></td>
+  </tr>
+  <% end %>
+</table>
+<%= will_paginate @bookings, previous_label: '<<', next_label: '>>' %>
+<% else %>
+<p>予約はありません。</p>
+<% end %>
+</div>
+</div>

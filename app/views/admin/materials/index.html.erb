@@ -1,0 +1,32 @@
+<div class="lbody">
+<% @page_title = "機材一覧" %>
+<% @mkn = "" %>
+<h2><%= @page_title %></h2>
+<div class="box">
+<% if @materials.present? %>
+<table class="list">
+<% @materials.each do |material| %>
+<% if @mkn != material.kind.name %>
+<% @mkn = material.kind.name %>
+  <tr>
+    <th><%= @mkn %></th>
+  </tr>
+<% end %>
+  <tr>
+    <td><%= material.name %></td>
+    <td>
+      <%= link_to "編集", [:edit, :admin, material] %>
+	|<%= link_to "削除", [:admin, material], method: :delete, confirm: "本当に削除しますか？" %>
+<% if material.suspend %>
+ |<%= link_to "再開", suspend_admin_materials_path(id: material.id), method: :put, confirm: "本当に停止を取り消しますか？" %>
+<% else %>
+|<%= link_to "停止", suspend_admin_materials_path(id: material.id), method: :put, confirm: "本当に停止しますか？" %>
+<% end %>
+　　　　</td>
+  </tr>
+<% end %>
+</table>
+</br>
+<% end %>
+</div>
+</div>

@@ -1,0 +1,43 @@
+<table class="form">
+  <tr>
+    <th><%= form.label :name %></th>
+    <td><%= form.text_field :name %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :tel %></th>
+    <td><%= form.text_field :tel %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :email %></th>
+    <td><%= form.text_field :email %></td>
+  </tr>
+<% if controller.kind_of?(Admin::MembersController) %>
+  <tr>
+    <th><%= Member.human_attribute_name(:admin) %></th>
+    <td>
+      <%= form.check_box :admin %>
+      <%= form.label :admin %>
+    </td>
+  </tr>
+  <tr>
+    <th><%= form.label :suspend %></th>
+    <td>
+      <%= form.check_box :suspend %>
+      <%= form.label :suspend %>
+    </td>
+  </tr>
+<% end %>
+<% if @current_member == @member %>
+  <tr>
+    <th><%= form.label :password %></th>
+    <td><%= form.password_field :password %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :password_confirmation %></th>
+    <td><%= form.password_field :password_confirmation %></td>
+  </tr>
+<% end %>
+</table>
+
+<% unless @member.new_record? %>
+<% end %>

@@ -1,0 +1,50 @@
+<div class="lbody">
+<% @page_title = "マイアカウント" %>
+<h2><%= @page_title %></h2>
+<div class="box">
+
+<% if @current_member.admin %>
+<%= link_to "管理TOP", :admin_root %>
+<% end %>
+
+<h3><%= @current_member.name %>さんの情報</h3>
+
+
+<p><%= link_to "アカウント情報の編集", :edit_account %></p>
+</br>
+<% if !@booking %>
+<p>予約はありません</p>
+<% else %>
+<p>最新の予約 id:<%= link_to @booking.book_id, @booking %></p>
+<%= render "admin/bookings/body" %>
+<% end %>
+
+</br></br>
+<h3>予約履歴</h3>
+<table class="list">
+  <tr>
+    <th>日にち</th>
+    <th>予約id</th>
+    <th>予約時間</th>
+    <th>部屋</th>
+    <th>レンタル機材数</th>
+　　　　<th>完了</th>
+  </tr>
+<% @histories.each do |history| %>
+  <tr>
+    <td><%= history.date %></td>
+    <td><%= link_to history.book_id, history %></td>
+    <td><%= history.room.name%></td>
+    <td><%= history.from %>時~<%= history.to %>時</td>
+    <td><%= history.materials.count %>個</td>
+<% if history.date >= Date.today%>
+    <td>未</td>
+<% else %>
+    <td>済</td>
+<% end %>
+  </tr>
+<% end %>
+</table>
+
+</div>
+</div>

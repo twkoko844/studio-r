@@ -1,0 +1,38 @@
+<div class="lbody">
+<% @page_title = "会員一覧" %>
+<h2><%= @page_title %></h2>
+<div class="box">
+<%= link_to "会員追加", :new_admin_member %>
+<% if @members.present? %>
+<table class="list">
+  <tr>
+    <th>名前</th>
+    <th>TEL</th>
+    <th>e-mail</th>
+　　　　<th>停止</th>
+  </tr>
+  <% @members.each do |member| %>
+  <tr>
+    <td align="right"><%= link_to member.name, [:admin, member] %></td>
+    <td><%= member.tel %></td>
+    <td><%= member.email %></td>
+    <td><%= member.suspend? ? "○" : "－" %></td>
+    <td><%= link_to "編集", [:edit, :admin, member] %> |
+	<% if member != @current_member %>
+	<%= link_to "削除", [:admin, member], method: :delete, confirm: "本当に削除しますか？" %> |
+<% if !member.suspend %>
+        <%= link_to "停止", suspend_admin_members_path(id: member.id), method: :put, confirm: "本当に停止しますか？" %>
+<% else %>
+        <%= link_to "再開", suspend_admin_members_path(id: member.id), method: :put, confirm: "本当に再開しますか？" %>
+<% end %>
+	<% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<%= will_paginate @bookings, previous_label: '<<', next_label: '>>' %>
+<% else %>
+<p>会員情報がありません。</p>
+<% end %>
+</div>
+</div>
